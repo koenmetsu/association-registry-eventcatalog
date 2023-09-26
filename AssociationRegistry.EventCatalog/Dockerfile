@@ -46,4 +46,4 @@ WORKDIR /app
 COPY --from=build-node /catalog .
 
 # As your .NET app is now run during build, the final ENTRYPOINT will only focus on the Node app.
-ENTRYPOINT ["npm", "run", "dev"]
+ENTRYPOINT ["npm", "run", "build"]
