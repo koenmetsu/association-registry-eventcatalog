@@ -1,0 +1,35 @@
+name: Docker Build and Push to Deploy Branch
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Build Docker image
+      run: |
+        docker build -t my-app .
+        
+    - name: Run Docker container
+      run: |
+        docker run --name temp-container my-app
+
+    - name: Copy output from Docker container
+      run: |
+        docker cp temp-container:/app/output ./output
+
+    - name: Commit and push to deploy branch
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git checkout -b deploy
+        git add ./output
+        git commit -m "Add output from Docker build"
+        git push -f origin deploy
