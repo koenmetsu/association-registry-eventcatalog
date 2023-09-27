@@ -24,7 +24,7 @@ jobs:
 
     - name: Copy output from Docker container
       run: |
-        docker cp temp-container:/build ./output
+        docker cp temp-container:/app/.eventcatalog-core/out ./output
 
     - name: Commit and push to deploy branch
       run: |
