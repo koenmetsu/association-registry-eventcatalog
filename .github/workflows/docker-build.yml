@@ -15,7 +15,8 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t my-app .
+        cd AssociationRegistry.EventCatalog
+	docker build -t my-app .
         
     - name: Run Docker container
       run: |
