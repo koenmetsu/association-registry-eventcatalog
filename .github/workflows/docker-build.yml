@@ -17,16 +17,13 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Build Docker image
-      run: |
-	docker build -t my-app .
+      run: docker build -t my-app .
         
     - name: Run Docker container
-      run: |
-        docker run --name temp-container my-app
+      run: docker run --name temp-container my-app
 
     - name: Copy output from Docker container
-      run: |
-        docker cp temp-container:/app/output ./output
+      run: docker cp temp-container:/app/output ./output
 
     - name: Commit and push to deploy branch
       run: |
